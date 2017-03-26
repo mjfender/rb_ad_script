@@ -23,11 +23,14 @@ def parse_csv
   # create csv with name based on timestamp
 
   CSV.open(filename, "wb") do |csv|
+    # creates new CSV file, "wb" is the file mode (write + binary mode)
     csv << ['Category Name', 'Impressions', 'Viewed Impressions', 'Clicks', 'Conversions', 'Click Rate', 'Conversion Rate', 'Relative Performance']
 
     new_values.to_a.each do |elem|
       row = []
+      # elem[0] is the category name
       row << elem[0]
+      # elem[1] is the hash containing the category's metrics / values
       row << elem[1].map do |key, value|
         value
         end
@@ -52,11 +55,8 @@ end
 
 def bucket_category(hash, all_categories)
   category = hash[:category].to_sym
-  # domain = hash.domain.to_sym
   all_categories[category] ||= {}
-  # all_categories[category][domain] ||= {}
   all_categories[category][:imps]  ||= 0
-  all_categories[category][:imps]
   all_categories[category][:viewed_imps]  ||= 0
   all_categories[category][:clicks]  ||= 0
   all_categories[category][:convs]  ||= 0
@@ -101,10 +101,10 @@ def sorter(all_categories)
 end
 
 # TODO: make a simple CLI and ask user which report to create..
-# 1: By Category
-# 2: By Domain
-# ..etc
-# Use choice to route to the functions above and create CSV
+#     1: By Category
+#     2: By Domain
+#     ..etc
+#     3: Then use choice to route to the functions above and create CSV
 
-#runs main script, the parse_csv function
+# run main script, the parse_csv function
 parse_csv
