@@ -2,7 +2,7 @@ require 'csv'
 require 'date'
 
 def parse_csv
-  all_categories ||= {}
+  all_categories = {}
 
   # line 8 imports the raw performance_data.csv one row at a time, converting values into hashes
   CSV.foreach("./performance_data.csv",  {:headers => true, :header_converters => :symbol, :converters => :all }) do |row|
